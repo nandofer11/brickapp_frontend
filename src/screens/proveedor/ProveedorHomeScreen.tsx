@@ -40,7 +40,7 @@ export default function ProveedorHomeScreen({ navigation }) {
 
   const data = [
     { title: 'Materiales', icon: require('../../../assets/icons/icon_material.png'), onPress: () => navigation.navigate('MaterialesProveedor') },
-    { title: 'Opción 1', icon: require('../../../assets/icons/icon_material.png'), onPress: () => console.log('Opción 1 presionada') },
+    { title: 'Pedidos', icon: require('../../../assets/icons/icon_pedido_proveedor.png'), onPress: () => navigation.navigate('PedidosProveedor') },
     { title: 'Opción 2', icon: require('../../../assets/icons/icon_material.png'), onPress: () => console.log('Opción 2 presionada') },
   ];
 

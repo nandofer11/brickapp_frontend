@@ -14,7 +14,7 @@ export default function SelectTypeRegisterScreen() {
     <View style={styles.container}>
      <Image style={styles.logo} source={require('../../../assets/images/logoColor.png')} />
       <Text style={styles.paragraph}>Solución en la Gestión de Industrias Ladrilleras</Text>
-      <Text style={{fontSize: FONTSIZE.size_24, marginBottom: SPACING.space_30}}>¿Cómo desea registrarse?</Text>
+      <Text style={{marginBottom: SPACING.space_10, color: COLORS.black}}>Registrarse como:</Text>
 
       <ButtonLight 
         onPress={() => navigation.navigate('RegisterEmpresa')}

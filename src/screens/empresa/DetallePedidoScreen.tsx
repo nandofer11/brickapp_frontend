@@ -182,7 +182,7 @@ export default function DetallePedidoScreen({ navigation }) {
                         <Text style={styles.modalText}>{selectedMaterial.nombre}</Text>
                         <Text style={{marginBottom: SPACING.space_18}}>Precio Unitario: S/. {selectedMaterial.precio_unitario}</Text>
                         <TextInput
-                            style={styles.input}
+                            style={styles.inputPriceModal}
                             placeholder="Cantidad"
                             value={cantidad}
                             onChangeText={setCantidad}
@@ -270,10 +270,10 @@ const styles = StyleSheet.create({
         fontWeight: '900',
     },
     modalView: {
-        margin: 20,
+        margin: 'auto',
         backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
+        borderRadius: BORDERRADIUS.radius_20,
+        padding: SPACING.space_30,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -285,9 +285,15 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     modalText: {
-        marginBottom: 15,
+        marginBottom: SPACING.space_15,
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: FONTSIZE.size_16,
     },
+    inputPriceModal:{
+        borderWidth: 1,
+        borderRadius: BORDERRADIUS.radius_8,
+        padding: SPACING.space_8,
+        borderColor: COLORS.orange
+    }
 });

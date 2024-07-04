@@ -14,7 +14,7 @@ export default function MainScreen() {
     <View style={styles.container}>
       <Image style={styles.logo} source={require('../../assets/images/logoColor.png')} />
       <Text style={styles.paragraph}>Solución en la Gestión de Industrias Ladrilleras</Text>
-      <Text>Iniciar sesión como:</Text>
+      <Text style={{marginBottom: SPACING.space_10, color: COLORS.black}}>Iniciar sesión como:</Text>
 
       <ButtonLight 
         onPress={() => { navigation.navigate('LoginEmpresa') }}

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
+import { BORDERRADIUS, COLORS, SPACING } from '../../styles/gstyles';
+import ButtonPrimary from '../../components/ButtonPrimary';
+// import {  } from 'react-native-safe-area-context';
+// import {  } from 'react-native-reanimated/lib/typescript/Animated';
 
 export default function RegisterEmpresaScreen() {
   const [ruc, setRuc] = useState('');
@@ -33,30 +37,60 @@ export default function RegisterEmpresaScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>RUC</Text>
+      <ScrollView>
+      <Text style={styles.titulo}>REGISTRAR EMPRESA</Text>
+      <Text style={styles.parrafo}>Complete los siguientes datos para registrar una empresa.</Text>
+      <Text style={styles.label}>RUC</Text>
       <TextInput style={styles.input} value={ruc} onChangeText={setRuc} />
-      <Text>Nombre Comercial</Text>
+      <Text style={styles.label}>Nombre Comercial</Text>
       <TextInput style={styles.input} value={nombre_comercial} onChangeText={setNombreComercial} />
-      <Text>Dirección</Text>
+      <Text style={styles.label}>Dirección</Text>
       <TextInput style={styles.input} value={direccion} onChangeText={setDireccion} />
-      <Text>Teléfono</Text>
+      <Text style={styles.label}>Teléfono</Text>
       <TextInput style={styles.input} value={telefono} onChangeText={setTelefono} />
-      <Text>Email</Text>
+      <Text style={styles.label}>Email</Text>
       <TextInput style={styles.input} value={email} onChangeText={setEmail} />
-      <Text>Web</Text>
+      <Text style={styles.label}>Web</Text>
       <TextInput style={styles.input} value={web} onChangeText={setWeb} />
-      <Text>Distrito</Text>
+      <Text style={styles.label}>Distrito</Text>
       <TextInput style={styles.input} value={distrito} onChangeText={setDistrito} />
-      <Text>Provincia</Text>
+      <Text style={styles.label}>Provincia</Text>
       <TextInput style={styles.input} value={provincia} onChangeText={setProvincia} />
-      <Text>Departamento</Text>
+      <Text style={styles.label}>Departamento</Text>
       <TextInput style={styles.input} value={departamento} onChangeText={setDepartamento} />
-      <Button title="Registrar Empresa" onPress={handleRegister} />
+      <ButtonPrimary title="Registrar Empresa" onPress={handleRegister} />
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', padding: 20 },
-  input: { height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, paddingHorizontal: 10 }
+  container: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    padding: SPACING.space_20, 
+    backgroundColor: COLORS.gray2 
+  },
+  input: { 
+    height: 40, 
+    backgroundColor: COLORS.white,
+    borderRadius: BORDERRADIUS.radius_8,
+    marginVertical: SPACING.space_4, 
+    paddingHorizontal: SPACING.space_10 
+  },
+  titulo:{
+    marginVertical: SPACING.space_8,
+    color: COLORS.black,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  parrafo:{
+    marginVertical: SPACING.space_8,
+    color: COLORS.black,
+    // textAlign: 'center'
+  },
+  label: {
+    color: COLORS.gray,
+    marginTop: SPACING.space_4
+  }
 });

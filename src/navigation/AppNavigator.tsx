@@ -7,6 +7,8 @@ import { AuthContext } from '../contexts/AuthContext';
 import PedidosScreen from '../screens/empresa/PedidosScreen';
 import DetallePedidoScreen from '../screens/empresa/DetallePedidoScreen';
 import { COLORS } from '../styles/gstyles';
+import VerDetallePedidoScreen from '../screens/empresa/VerDetallePedidoScreen';
+import ReportesScreen from '../screens/empresa/ReportesScreen';
 
 
 const Stack = createStackNavigator();
@@ -26,7 +28,9 @@ export default function AppNavigator() {
         <>
         <Stack.Screen name="Empresa" component={EmpresaNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="Pedidos" component={PedidosScreen}  />
+        <Stack.Screen name="Reportes" component={ReportesScreen}  />
         <Stack.Screen name="DetallePedido" component={DetallePedidoScreen}  options={{title: 'Detalle del pedido'}}/>
+        <Stack.Screen name='VerDetallePedidoScreen' component={VerDetallePedidoScreen} options={{title: 'Ver detalle del pedido'}}/>
         </>
         
       ) : (

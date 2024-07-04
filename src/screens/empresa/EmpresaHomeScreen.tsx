@@ -8,6 +8,7 @@ export default function EmpresaHomeScreen({ navigation }) {
 
   const data = [
     { title: 'Pedidos', icon: require('../../../assets/icons/icon_pedidos.png'), onPress: () => navigation.navigate('Pedidos') },
+    { title: 'Reportes', icon: require('../../../assets/icons/icon_report.png'), onPress: () => navigation.navigate('Reportes') },
     { title: 'Inventario', icon: require('../../../assets/icons/icon_material.png'), onPress: () => navigation.navigate('Material') },
     { title: 'Trabajadores', icon: require('../../../assets/icons/icon_proveedores.png'), onPress: () => navigation.navigate('Supplier') },
   ];
