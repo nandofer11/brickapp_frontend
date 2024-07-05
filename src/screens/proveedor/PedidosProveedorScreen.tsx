@@ -4,6 +4,9 @@ import { useIsFocused, useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/AuthContext';
 import { COLORS, FONTSIZE, SPACING, BORDERRADIUS } from '../../styles/gstyles';
+// Para formatear las fechas
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 export default function PedidosProveedorScreen() {
   const { user } = useContext(AuthContext);
@@ -34,7 +37,7 @@ export default function PedidosProveedorScreen() {
     <TouchableOpacity onPress={() => navigation.navigate('DetallePedidoProveedor', { pedido: item })}>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>{item.Usuario.Empresa.nombre_comercial}</Text>
-        <Text style={styles.cardSubtitle}>Fecha de Pedido: {new Date(item.fecha_pedido).toLocaleDateString()}</Text>
+        <Text style={styles.cardSubtitle}>Fecha de Pedido: {format(item.fecha_pedido, "d 'de' MMMM yyyy", { locale: es })}</Text>
         <Text style={styles.cardSubtitle}>Estado: {item.estado}</Text>
         <Text style={styles.cardPrice}>
           Subtotal: S/. {item.DetallePedidos && Array.isArray(item.DetallePedidos) && item.DetallePedidos.length > 0 ?
@@ -68,8 +71,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONTSIZE.size_20,
     fontWeight: 'bold',
-    marginBottom: SPACING.space_16,
-    color: COLORS.black
+    marginVertical: SPACING.space_16,
+    color: COLORS.black,
+    textAlign: 'center'
   },
   listContainer: {
     paddingBottom: SPACING.space_20,

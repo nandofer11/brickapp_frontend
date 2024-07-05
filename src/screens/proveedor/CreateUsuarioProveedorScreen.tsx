@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function CreateUsuarioProveedorScreen() {
   const [nombre_completo, setNombreCompleto] = useState('');
@@ -10,6 +11,7 @@ export default function CreateUsuarioProveedorScreen() {
   const navigation = useNavigation();
   const route = useRoute();
   const { Proveedor_id_proveedor } = route.params;
+  const { signIn } = useContext(AuthContext);
 
   const handleRegister = async () => {
     try {
@@ -18,6 +20,8 @@ export default function CreateUsuarioProveedorScreen() {
       });
       if (response.data) {
         Alert.alert('Usuario creado exitosamente');
+        // Iniciar sesión automáticamente después del registro
+        await signIn({ usuario, contraseña });
         navigation.navigate('ProveedorHome');
       } else {
         Alert.alert('Error en el registro del usuario');

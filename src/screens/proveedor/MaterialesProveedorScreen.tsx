@@ -6,6 +6,7 @@ import api from '../../services/api';
 import { AuthContext } from '../../contexts/AuthContext';
 import { BORDERRADIUS, COLORS, FONTSIZE, SPACING } from '../../styles/gstyles';
 import ButtonDarken from '../../components/ButtonDarken';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'
 
 export default function MaterialesProveedorScreen() {
   const navigation = useNavigation();
@@ -58,8 +59,8 @@ export default function MaterialesProveedorScreen() {
         <Text style={styles.cardTitle}>{item.nombre}</Text>
         <Text style={styles.cardSubtitle}>Peso: {item.peso} kg.</Text>
       </View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Text style={styles.cardPrice}>S/. {item.precio_unitario}</Text>     
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text style={styles.cardPrice}>S/. {item.precio_unitario}</Text>
         <Menu
           visible={menuVisible && selectedMaterial?.id_material === item.id_material}
           onDismiss={closeMenu}
@@ -94,6 +95,17 @@ export default function MaterialesProveedorScreen() {
         keyExtractor={(item) => item.id_material.toString()}
         contentContainerStyle={styles.listContainer}
       />
+
+      <View style={{ flexDirection: 'row', gap: 20, alignSelf: 'center' }}>
+        <View style={{ alignItems: 'center' }}>
+          <FontAwesome6 name={'square-share-nodes'} size={32} color={COLORS.black} />
+          <Text>Compartir</Text>
+        </View>
+        <View style={{ alignItems: 'center' }}>
+          <FontAwesome6 name={'print'} size={32} color={COLORS.black} />
+          <Text>Imprimir</Text>
+        </View>
+      </View>
     </View>
   );
 }

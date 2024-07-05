@@ -4,26 +4,30 @@ import { COLORS, FONTSIZE, SPACING, BORDERRADIUS } from '../../styles/gstyles';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/AuthContext';
 import ButtonDarken from '../../components/ButtonDarken';
-// Para formatear las fechas
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function PedidosScreen({navigation}) {
   const { user } = useContext(AuthContext);
   const [pedidos, setPedidos] = useState([]);
+  const isFocused = useIsFocused();
+
+  const fetchPedidos = async () => {
+    console.log("user.Empresa_id_empresa: " ,user.Empresa_id_empresa)
+    try {
+      const response = await api.get(`pedido/empresa/${user.Empresa_id_empresa}`);
+      setPedidos(response.data);
+    } catch (error) {
+      console.error('Error al obtener los pedidos:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchPedidos = async () => {
-      try {
-        const response = await api.get('/pedido');
-        setPedidos(response.data);
-      } catch (error) {
-        console.error('Error al obtener los pedidos:', error);
-      }
-    };
-
-    fetchPedidos();
-  }, []);
+    if (isFocused) {
+      fetchPedidos();
+    }
+  }, [isFocused]);
 
   const getColorEstado = (estado) => {
     switch (estado) {
@@ -44,10 +48,9 @@ export default function PedidosScreen({navigation}) {
     <TouchableOpacity onPress={() => navigation.navigate('VerDetallePedidoScreen', { pedidoId: item.id_pedido })}>
       <View style={styles.card}>
         <View>
-        <Text style={styles.proveedor}>{item.Proveedor.razon_social}</Text>
-        <Text style={styles.fechaPedido}>Fecha de pedido: {format(item.fecha_pedido, "d 'de' MMMM yyyy", { locale: es })}</Text>
+          <Text style={styles.proveedor}>{item.Proveedor.razon_social}</Text>
+          <Text style={styles.fechaPedido}>Fecha de pedido: {format(new Date(item.fecha_pedido), "d 'de' MMMM yyyy", { locale: es })}</Text>
         </View>
-        
         <Text style={[styles.estado, { color: getColorEstado(item.estado) }]}>{item.estado}</Text>
       </View>
     </TouchableOpacity>
@@ -55,7 +58,7 @@ export default function PedidosScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <ButtonDarken title={'Realizar pedido'} onPress={()=>{navigation.navigate('DetallePedido')}}/>
+      <ButtonDarken title={'Realizar pedido'} onPress={() => {navigation.navigate('DetallePedido')}} />
       <Text style={styles.title}>Listado de pedidos</Text>
       <FlatList
         data={pedidos}
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONTSIZE.size_14,
     marginBottom: SPACING.space_12,
-    color: COLORS.gray
+    color: COLORS.gray,
   },
   list: {
     paddingBottom: SPACING.space_18,
